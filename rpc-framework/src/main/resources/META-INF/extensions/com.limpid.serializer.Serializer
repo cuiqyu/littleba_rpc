@@ -1,0 +1,1 @@
+kryo=com.limpid.serializer.kryo.KryoSerializer
