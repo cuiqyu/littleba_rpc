@@ -5,6 +5,7 @@ import com.limpid.entity.RpcServiceProperties;
 import com.limpid.factory.SingletonFactory;
 import com.limpid.provider.ServiceProvider;
 import com.limpid.provider.ServiceProviderImpl;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -17,14 +18,15 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class SpringBeanPostProcesser implements BeanPostProcessor {
+public class SpringBeanPostProcessor implements BeanPostProcessor {
 
     private final ServiceProvider serviceProvider;
 
-    public SpringBeanPostProcesser() {
-        this.serviceProvider = SingletonFactory.getInstance(ServiceProviderImpl.class);
+    public SpringBeanPostProcessor() {
+        serviceProvider = SingletonFactory.getInstance(ServiceProviderImpl.class);
     }
 
+    @SneakyThrows
     @Nullable
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -35,7 +37,7 @@ public class SpringBeanPostProcesser implements BeanPostProcessor {
             // 构建RPC服务参数
             RpcServiceProperties build = RpcServiceProperties.builder().group(rpcService.group()).version(rpcService.version()).build();
             // 发布RPC服务
-            serviceProvider.publishService(rpcService, build);
+            serviceProvider.publishService(bean, build);
         }
         return bean;
     }

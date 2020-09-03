@@ -14,6 +14,9 @@
     <modules>
         <module>rpc-common</module>
         <module>rpc-framework</module>
+        <module>example-server</module>
+        <module>example-client</module>
+        <module>example-api</module>
     </modules>
 
     <properties>
@@ -38,6 +41,7 @@
         <kryo.version>4.0.2</kryo.version>
         <!-- zookeeper相关 -->
         <curator-version>4.2.0</curator-version>
+        <zookeeper.version>3.4.6</zookeeper.version>
     </properties>
 
     <dependencies>

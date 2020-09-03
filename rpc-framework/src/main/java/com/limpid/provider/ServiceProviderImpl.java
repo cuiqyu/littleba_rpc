@@ -29,20 +29,26 @@ public class ServiceProviderImpl implements ServiceProvider {
      * key: rpc服务名称(interface name + version + group)
      * value: 服务实例对象
      */
-    private final Map<String, Object> serviceMap = new ConcurrentHashMap<>();
+    private final Map<String, Object> serviceMap;
     /**
      * 注册的服务集合
      */
-    private final Set<String> registeredService = ConcurrentHashMap.newKeySet();
+    private final Set<String> registeredService;
     /**
      * 服务注册器
      */
-    private final ServiceRegistry serviceRegistry = SpiExtensionsLoader.getSpiExtensionsLoader(ServiceRegistry.class).getExtension("zk");
+    private final ServiceRegistry serviceRegistry;
+
+    public ServiceProviderImpl() {
+        serviceMap = new ConcurrentHashMap<>();
+        registeredService = ConcurrentHashMap.newKeySet();
+        serviceRegistry = SpiExtensionsLoader.getSpiExtensionsLoader(ServiceRegistry.class).getExtension("zk");
+    }
 
     @Override
     public void addService(Object service, Class<?> serviceClass, RpcServiceProperties rpcServiceProperties) {
         // 获取rpc服务名称
-        String serviceName = rpcServiceProperties.getServiceName();
+        String serviceName = rpcServiceProperties.toRpcServiceName();
         // 判断是否已经注册过
         if (registeredService.contains(serviceName)) {
             return;

@@ -1,5 +1,6 @@
 package com.limpid.remoting.entity;
 
+import com.limpid.entity.RpcServiceProperties;
 import com.limpid.enumeration.RpcMessageTypeEnum;
 import lombok.*;
 
@@ -53,5 +54,11 @@ public class RpcRequest implements Serializable {
      * 服务组
      */
     private String group;
+
+    public RpcServiceProperties toRpcProperties() {
+        return RpcServiceProperties.builder().serviceName(this.getInterfaceName())
+                .version(this.getVersion())
+                .group(this.getGroup()).build();
+    }
 
 }

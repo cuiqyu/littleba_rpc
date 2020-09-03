@@ -29,7 +29,8 @@ public class SingletonFactory {
             synchronized (clazz) {
                 // 创建实例并存入缓存，如果有则直接返回原来的
                 try {
-                    instance = OBJECTMAP.putIfAbsent(key, clazz.getDeclaredConstructor().newInstance());
+                    OBJECTMAP.putIfAbsent(key, clazz.getDeclaredConstructor().newInstance());
+                    instance = OBJECTMAP.get(key);
                 } catch (IllegalAccessException | InstantiationException e) {
                     throw new RuntimeException(e.getMessage(), e);
                 } catch (NoSuchMethodException | InvocationTargetException e) {
