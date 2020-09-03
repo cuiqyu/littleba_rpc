@@ -1,4 +1,4 @@
-package com.limpid.utils;
+package com.limpid.utils.exception;
 
 import com.google.common.collect.Lists;
 import com.limpid.exception.BusinessException;

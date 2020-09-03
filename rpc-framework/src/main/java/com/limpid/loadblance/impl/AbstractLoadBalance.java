@@ -1,7 +1,7 @@
 package com.limpid.loadblance.impl;
 
 import com.limpid.loadblance.LoadBalance;
-import com.limpid.utils.ExceptionAssertUtil;
+import com.limpid.utils.exception.ExceptionAssertUtil;
 
 import java.util.List;
 

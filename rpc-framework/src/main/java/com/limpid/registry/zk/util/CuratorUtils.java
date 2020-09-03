@@ -2,7 +2,7 @@ package com.limpid.registry.zk.util;
 
 import com.limpid.enumeration.RpcConfigPropertiesEnum;
 import com.limpid.exception.RpcException;
-import com.limpid.utils.PropertiesFileUtils;
+import com.limpid.utils.file.PropertiesFileUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;

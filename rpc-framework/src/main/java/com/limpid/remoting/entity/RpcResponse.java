@@ -1,5 +1,6 @@
 package com.limpid.remoting.entity;
 
+import com.limpid.enumeration.RpcResponseCode;
 import lombok.*;
 
 import java.io.Serializable;
@@ -36,5 +37,23 @@ public class RpcResponse<T> implements Serializable {
      * 响应内容
      */
     private T data;
+
+    public static <T> RpcResponse<T> success(T data, String requestId) {
+        RpcResponse<T> response = new RpcResponse<>();
+        response.setCode(RpcResponseCode.SUCCESS.getCode());
+        response.setMessage(RpcResponseCode.SUCCESS.getMessage());
+        response.setRequestId(requestId);
+        if (null != data) {
+            response.setData(data);
+        }
+        return response;
+    }
+
+    public static <T> RpcResponse<T> fail(RpcResponseCode rpcResponseCode) {
+        RpcResponse<T> response = new RpcResponse<>();
+        response.setCode(rpcResponseCode.getCode());
+        response.setMessage(rpcResponseCode.getMessage());
+        return response;
+    }
 
 }
